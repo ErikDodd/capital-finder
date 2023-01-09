@@ -15,12 +15,12 @@ class handler(BaseHTTPRequestHandler):
             url = "https://restcountries.com/v3.1/name/"
             request = requests.get(url + dictionary["country"])
             data = request.json()
-            countries_searched = ""
+            countries_searched = []
             for countries in data:
                 country = countries["capital"][0]
-                #countries_searched.append(country)
-                countries_searched += country
-            message = f"The capital of {dictionary['country']} is {countries_searched}"
+                countries_searched.append(country)
+                #countries_searched += country
+            message = f"The capital of {dictionary['country']} is {countries_searched[0]}"
         else:
             message = "Please give us the name of a country"
 
@@ -28,7 +28,6 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
-
 
         self.wfile.write(message.encode())
 
