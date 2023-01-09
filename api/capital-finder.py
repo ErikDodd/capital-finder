@@ -12,18 +12,19 @@ class handler(BaseHTTPRequestHandler):
 
         url = "https://restcountries.com/v3.1/capital/"
         user_input = input("> ")
-        request = requests.get(url + "?country=" + user_input)
+        request = requests.get(url + user_input)
         data = request.json()
         countries_searched = []
         for countries in data:
-            country = countries["country"][0]["capital"]
+            country = countries[0]["capital"]
             countries_searched.append(country)
+        message = f"The capital of {countries_searched} is Y"
 
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
 
-        message = "The capital of X is Y"
+
         self.wfile.write(message.encode())
 
         return
