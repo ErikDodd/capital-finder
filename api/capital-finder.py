@@ -14,6 +14,10 @@ class handler(BaseHTTPRequestHandler):
         user_input = input("> ")
         request = requests.get(url + "?country=" + user_input)
         data = request.json()
+        countries_searched = []
+        for countries in data:
+            country = countries["country"][0]["capital"]
+            countries_searched.append(country)
 
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
