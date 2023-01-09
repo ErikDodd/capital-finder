@@ -17,7 +17,7 @@ class handler(BaseHTTPRequestHandler):
             data = request.json()
             countries_searched = []
             for countries in data:
-                country = countries["capital"][1]
+                country = countries["capital"][0]
                 countries_searched.append(country)
             message = f"The capital of {dictionary['name']} is {countries_searched[0]}"
         else:
