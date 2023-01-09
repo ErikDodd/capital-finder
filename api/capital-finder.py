@@ -11,15 +11,15 @@ class handler(BaseHTTPRequestHandler):
         query_string_list = parse.parse_qsl(url_components.query)
         dictionary = dict(query_string_list)
 
-        if "country" in dictionary:
-            url = "https://restcountries.com/v3.1/capital/"
-            request = requests.get(url + dictionary["country"])
+        if "name" in dictionary:
+            url = "https://restcountries.com/v3.1/name/"
+            request = requests.get(url + dictionary["name"])
             data = request.json()
             countries_searched = []
             for countries in data:
                 country = countries["capital"][1]
                 countries_searched.append(country)
-            message = f"The capital of {dictionary['country']} is {countries_searched[0]}"
+            message = f"The capital of {dictionary['name']} is {countries_searched[0]}"
         else:
             message = "Please give us the name of a country"
 
