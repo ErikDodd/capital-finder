@@ -22,7 +22,7 @@ class handler(BaseHTTPRequestHandler):
                 #countries_searched += country
             message = f"The capital of {dictionary['country']} is {countries_searched[0]}"
         else:
-            message = "Please give us the name of a country"
+            message = "Please give us the name of a country..."
 
 
         self.send_response(200)
