@@ -9,16 +9,18 @@ class handler(BaseHTTPRequestHandler):
         s = self.path
         url_components = parse.urlsplit(s)
         query_string_list = parse.parse_qsl(url_components.query)
+        dictionary = dict(query_string_list)
 
-        url = "https://restcountries.com/v3.1/capital/"
-        user_input = input("> ")
-        request = requests.get(url + user_input)
-        data = request.json()
-        countries_searched = []
-        for countries in data:
-            country = countries[0]["capital"]
-            countries_searched.append(country)
-        message = f"The capital of {countries_searched} is Y"
+        if "country" in dictionary:
+            url = "https://restcountries.com/v3.1/capital/"
+            request = requests.get(url + dictionary["country"])
+            data = request.json()
+            countries_searched = []
+            for countries in data:
+                country = countries["capital"][1]
+                countries_searched.append(country)
+            message = f"The capital of {dictionary['country']} is {countries_searched[0]}"
+
 
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
