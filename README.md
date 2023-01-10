@@ -1,3 +1,7 @@
+# ReadME for Lab 16
+https://serverless-self-iota.vercel.app/api/capital-finder?country=peru
+
+https://serverless-self-iota.vercel.app/api/country-finder?capital=lima
 
 ## Attributions
 

@@ -22,8 +22,20 @@ class handler(BaseHTTPRequestHandler):
                 #countries_searched += country
             message = f"The capital of {dictionary['country']} is {countries_searched[0]}"
 
+        #else:
+            #message = "Please give us the name of a country..."
+
+        elif "capital" in dictionary:
+            cap_url = "https://restcountries.com/v3.1/capital/"
+            request = requests.get(cap_url + dictionary["capital"])
+            data = request.json()
+            capitals_searched = []
+            for capitals in data:
+                capital = capitals["country"][0]
+                capitals_searched.append(capital)
+                message = f"{dictionary['capital']} is the capital of {capitals_searched[0]}"
         else:
-            message = "Please give us the name of a country..."
+            message = "Type a search for either a country or capital into the query"
 
 
         self.send_response(200)
